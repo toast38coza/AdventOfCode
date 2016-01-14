@@ -34,26 +34,38 @@ class Present:
 		
 		return dimensions[0]*dimensions[1]
 
+	def get_volume(self):
+		return self.l*self.w*self.h
+
 	def get_wrapping_paper_area(self):
 		
 		return self.get_size() + self.get_area(self.get_smallest_side())
 
+	def get_ribbon_length(self):
+		side = self.get_smallest_side()
+
+		to_tie = side[0]+side[0]+side[1]+side[1]
+		vol = self.get_volume()
+		return to_tie + vol
 	
 
 def main():
 	total_area = 0
+	total_ribbon = 0
 	f = open('../input.txt', 'r')
 	present_dimensions = f.read().splitlines()
-	import pdb;pdb.set_trace()
+	
 	for present_dimension in present_dimensions:
-
-		present_area = Present(present_dimension).get_wrapping_paper_area()
-		print "{}. Area: {}". format(present_dimension, present_area)
+		present = Present(present_dimension)
+		present_area = present.get_wrapping_paper_area()
+		#print "{}. Area: {}". format(present_dimension, present_area)
 		total_area += present_area 
-		
-		
 
-	print total_area
+		present_ribbon = present.get_ribbon_length()
+		total_ribbon += present_ribbon
+		
+	print "Total area: {}" . format(total_area)
+	print "Ribbon required: {}" . format(total_ribbon)
 
 
 if __name__ == '__main__':
