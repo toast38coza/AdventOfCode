@@ -34,6 +34,15 @@ class TestPresent(unittest.TestCase):
 			area = Present(input).get_wrapping_paper_area()
 			assert area == expected_output, "Expected {} to be {}" . format (area, expected_output)
 
+	def test_get_ribbon_length(self):
+		test_inputs = [
+			("2x3x4", 34),
+			("1x1x10", 14)
+		]
+		for input, expected_output in test_inputs:
+
+			assert Present(input).get_ribbon_length() == expected_output
+
 if __name__ == '__main__':
     unittest.main()		
 		
